@@ -1,0 +1,61 @@
+.booking {
+  padding: 5rem 1.5rem;
+  background: #06b6d4;
+  color: white;
+}
+
+.booking-container {
+  max-width: 896px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.booking-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.booking-subtitle {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+.booking-button {
+  padding: 1rem 2rem;
+  background: white;
+  color: #06b6d4;
+  border: none;
+  border-radius: 9999px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  align-self: center;
+}
+
+.booking-button:hover {
+  background: #f3f4f6;
+  transform: translateY(-2px);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+  .booking {
+    padding: 3rem 1rem;
+  }
+
+  .booking-title {
+    font-size: 2rem;
+  }
+
+  .booking-subtitle {
+    font-size: 1.125rem;
+  }
+}

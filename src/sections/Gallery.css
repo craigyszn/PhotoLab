@@ -1,0 +1,13 @@
+.grid { display:grid; 
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); 
+    gap:12px; 
+}
+
+.thumb { 
+    background:#ddd; 
+    height:140px; 
+    border-radius:8px; 
+    display:flex; 
+    align-items:center; 
+    justify-content:center; 
+}
