@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Auth.css';
 
 const Auth = () => {
@@ -18,14 +19,19 @@ const Auth = () => {
     <div className="auth-page">
       <div className="auth-container">
         {/* Left Side - Image/Brand */}
-        <div className="auth-visual">
+        <Link
+          to="/"
+          className="auth-visual auth-visual-link"
+          aria-label="Go to homepage"
+        >
           <div className="auth-overlay">
             <div className="auth-brand">
               <h1>PhotoLab</h1>
               <p>Capture Your Moments, Create Your Memories</p>
             </div>
           </div>
-        </div>
+        </Link>
+
 
         {/* Right Side - Form */}
         <div className="auth-form-section">
