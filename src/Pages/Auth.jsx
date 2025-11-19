@@ -37,7 +37,7 @@ const Auth = () => {
               <p>Capture Your Moments, Create Your Memories</p>
             </div>
           </div>
-        </Link>
+        </div>
 
 
         <div className="auth-form-section">
