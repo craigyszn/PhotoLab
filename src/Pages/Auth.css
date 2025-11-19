@@ -267,3 +267,10 @@
     font-size: 1.75rem;
   }
 }
+/* Make the whole left panel behave like the old .auth-visual block */
+.auth-visual-link {
+  display: block;          /* panel stays full height/width */
+  text-decoration: none;   /* remove underline */
+  color: inherit;          /* keep original text color */
+  cursor: pointer;         /* show pointer on hover */
+}
