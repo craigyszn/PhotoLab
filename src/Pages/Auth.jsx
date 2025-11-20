@@ -11,25 +11,27 @@ const Auth = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // === FAKE AUTH (placeholder) ===
-    // Simulate login/signup success by writing a simple token to localStorage
-    // In a real app you'll call your backend here and store a proper token
+
+    // Fake login/signup
     const fakeToken = "fake-photolab-token-123";
     localStorage.setItem("photolab_token", fakeToken);
 
-    // Optionally store a small "user" object
     localStorage.setItem(
       "photolab_user",
-      JSON.stringify({ name: "Demo User", email: "demo@photolab.local" })
+      JSON.stringify({ 
+        name: "Demo User", 
+        email: "demo@photolab.local" 
+      })
     );
 
-    // Redirect to booking page after "login"
     navigate("/booking");
   };
 
   return (
     <div className="auth-page">
       <div className="auth-container">
+
+        {/* LEFT VISUAL PANEL */}
         <div className="auth-visual">
           <div className="auth-overlay">
             <div className="auth-brand">
@@ -39,9 +41,10 @@ const Auth = () => {
           </div>
         </div>
 
-
+        {/* RIGHT FORM PANEL */}
         <div className="auth-form-section">
           <div className="auth-form-container">
+
             <div className="auth-header">
               <h2>{isLogin ? "Welcome Back" : "Create Account"}</h2>
               <p>
@@ -52,30 +55,58 @@ const Auth = () => {
             </div>
 
             <form className="auth-form" onSubmit={handleSubmit}>
+
+              {/* SIGNUP ONLY — FIRST + LAST NAME */}
               {!isLogin && (
-                <div className="form-group">
-                  <label htmlFor="name">Full Name</label>
-                  <input type="text" id="name" placeholder="Enter your full name" required={!isLogin} />
+                <div className="form-row signup-names">
+                  <div className="form-group">
+                    <label htmlFor="firstName">First Name</label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      placeholder="Enter first name"
+                      required={!isLogin}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="lastName">Last Name</label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      placeholder="Enter last name"
+                      required={!isLogin}
+                    />
+                  </div>
                 </div>
               )}
 
+              {/* Email */}
               <div className="form-group">
                 <label htmlFor="email">Email Address</label>
                 <input type="email" id="email" placeholder="Enter your email" required />
               </div>
 
+              {/* Password */}
               <div className="form-group">
                 <label htmlFor="password">Password</label>
                 <input type="password" id="password" placeholder="Enter your password" required />
               </div>
 
+              {/* SIGNUP ONLY — CONFIRM PASSWORD */}
               {!isLogin && (
                 <div className="form-group">
                   <label htmlFor="confirmPassword">Confirm Password</label>
-                  <input type="password" id="confirmPassword" placeholder="Confirm your password" required={!isLogin} />
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm your password"
+                    required={!isLogin}
+                  />
                 </div>
               )}
 
+              {/* LOGIN ONLY — REMEMBER ME */}
               {isLogin && (
                 <div className="form-options">
                   <label className="remember-me">
@@ -106,8 +137,10 @@ const Auth = () => {
                 </button>
               </p>
             </div>
+
           </div>
         </div>
+
       </div>
     </div>
   );

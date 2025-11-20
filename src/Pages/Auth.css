@@ -274,3 +274,16 @@
   color: inherit;          /* keep original text color */
   cursor: pointer;         /* show pointer on hover */
 }
+
+/* For first name + last name layout on signup */
+.signup-names {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .signup-names {
+    grid-template-columns: 1fr;
+  }
+}
