@@ -69,17 +69,17 @@ const BookingPage = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.serviceType) { alert("Please choose a service first."); return; }
-    if (!formData.date || !formData.time) { alert("Please pick a date and time."); return; }
+  e.preventDefault();
+  if (!formData.serviceType) { alert("Please choose a service first."); return; }
+  if (!formData.date || !formData.time) { alert("Please pick a date and time."); return; }
 
-    const bookings = JSON.parse(localStorage.getItem("photolab_bookings") || "[]");
-    bookings.push({ id: Date.now(), ...formData });
-    localStorage.setItem("photolab_bookings", JSON.stringify(bookings));
+  const bookings = JSON.parse(localStorage.getItem("photolab_bookings") || "[]");
+  bookings.push({ id: Date.now(), ...formData });
+  localStorage.setItem("photolab_bookings", JSON.stringify(bookings));
 
-    alert("Booking saved (placeholder). Check localStorage under 'photolab_bookings'.");
-    // navigate('/my-bookings'); // optional redirect once you add that page
-  };
+  // Navigate to confirmation page with booking data
+  navigate('/booking-confirmation', { state: { bookingData: formData } });
+};
 
   return (
     <div className="booking-page">

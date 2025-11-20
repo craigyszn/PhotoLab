@@ -17,7 +17,7 @@ const Navbar = () => {
 
           <div className={`navbar-links ${isMenuOpen ? "active" : ""}`}>
             <a href="#how" className="navbar-link">How it Works</a>
-            <a href="#portfolio" className="navbar-link">Portfolio</a>
+            <Link to ="/portfolio" className="navbar-link">Portfolio</Link>
             <a href="#pricing" className="navbar-link">Pricing</a>
             <a href="#qa" className="navbar-link">Q&A</a>
             <Link to="/auth"><button className="navbar-button">Book Now</button></Link>

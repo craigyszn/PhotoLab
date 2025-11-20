@@ -35,7 +35,7 @@ export default function HowItWorks() {
             </div>
           </div>
 
-          <div className="arrow" aria-hidden="true">➜</div>
+          
         </div>
       </div>
 
