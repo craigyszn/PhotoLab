@@ -9,7 +9,7 @@ import com.example.oct28.finalproject.service.PhotographerService;
 
 @RestController
 @RequestMapping("/api/photographers")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173")
 public class PhotographerController {
 
     @Autowired

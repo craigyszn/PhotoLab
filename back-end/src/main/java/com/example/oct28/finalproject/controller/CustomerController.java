@@ -11,7 +11,7 @@ import com.example.oct28.finalproject.service.CustomerService;
 
 @RestController
 @RequestMapping("/api/customers")
-@CrossOrigin(origins = "http://localhost:3000") // allow frontend dev origin
+@CrossOrigin(origins = "http://localhost:5173") // allow frontend dev origin
 public class CustomerController {
 
     @Autowired

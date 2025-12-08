@@ -9,7 +9,7 @@ import com.example.oct28.finalproject.service.GalleryService;
 
 @RestController
 @RequestMapping("/api/galleries")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173")
 public class GalleryController {
 
     @Autowired

@@ -25,9 +25,13 @@ public class GalleryService {
     @Autowired
     private PhotographerRepository photographerRepo;
 
-    public List<GalleryEntity> getAll() { return galleryRepo.findAll(); }
+    public List<GalleryEntity> getAll() {
+        return galleryRepo.findAll();
+    }
 
-    public Optional<GalleryEntity> getById(Long id) { return galleryRepo.findById(id); }
+    public Optional<GalleryEntity> getById(Long id) {
+        return galleryRepo.findById(id);
+    }
 
     public GalleryEntity create(Long bookingId, Long photographerId, GalleryEntity g) {
         BookingEntity booking = bookingRepo.findById(bookingId)
@@ -47,3 +51,17 @@ public class GalleryService {
 
         BookingEntity booking = bookingRepo.findById(bookingId)
                 .orElseThrow(() -> new RuntimeException("Booking not found"));
+
+        PhotographerEntity photographer = photographerRepo.findById(photographerId)
+                .orElseThrow(() -> new RuntimeException("Photographer not found"));
+
+        g.setBooking(booking);
+        g.setPhotographer(photographer);
+
+        return galleryRepo.save(g);
+    }
+
+    public void delete(Long id) {
+        galleryRepo.deleteById(id);
+    }
+}

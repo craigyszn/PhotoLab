@@ -9,7 +9,7 @@ import com.example.oct28.finalproject.service.BookingService;
 
 @RestController
 @RequestMapping("/api/bookings")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173")
 public class BookingController {
 
     @Autowired

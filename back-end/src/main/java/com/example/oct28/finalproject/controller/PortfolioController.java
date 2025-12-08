@@ -9,7 +9,7 @@ import com.example.oct28.finalproject.service.PortfolioService;
 
 @RestController
 @RequestMapping("/api/portfolios")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173")
 public class PortfolioController {
 
     @Autowired
