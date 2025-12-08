@@ -10,29 +10,38 @@ public class GalleryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long galleryId;
 
-    private Long customerId;     // FK
-    private Long bookingId;      // FK
-    private Long photographerId; // FK
+    @ManyToOne
+    @JoinColumn(name = "booking_id", nullable = false)
+    private BookingEntity booking;
+
+    @ManyToOne
+    @JoinColumn(name = "photographer_id", nullable = false)
+    private PhotographerEntity photographer;
+
     private String uploadDate;
     private String photoUrl;
+    private String photoDescription;
 
     // Getters and Setters
     public Long getGalleryId() { return galleryId; }
     public void setGalleryId(Long galleryId) { this.galleryId = galleryId; }
 
-    public Long getCustomerId() { return customerId; }
-    public void setCustomerId(Long customerId) { this.customerId = customerId; }
+    public BookingEntity getBooking() { return booking; }
+    public void setBooking(BookingEntity booking) { this.booking = booking; }
 
-    public Long getBookingId() { return bookingId; }
-    public void setBookingId(Long bookingId) { this.bookingId = bookingId; }
-
-    public Long getPhotographerId() { return photographerId; }
-    public void setPhotographerId(Long photographerId) { this.photographerId = photographerId; }
+    public PhotographerEntity getPhotographer() { return photographer; }
+    public void setPhotographer(PhotographerEntity photographer) {
+        this.photographer = photographer;
+    }
 
     public String getUploadDate() { return uploadDate; }
     public void setUploadDate(String uploadDate) { this.uploadDate = uploadDate; }
 
     public String getPhotoUrl() { return photoUrl; }
     public void setPhotoUrl(String photoUrl) { this.photoUrl = photoUrl; }
+
+    public String getPhotoDescription() { return photoDescription; }
+    public void setPhotoDescription(String photoDescription) {
+        this.photoDescription = photoDescription;
+    }
 }
- 

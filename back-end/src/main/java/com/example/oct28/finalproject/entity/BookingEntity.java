@@ -10,24 +10,34 @@ public class BookingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookingId;
 
-    private Long customerId; // FK
-    private Long eventId;    // FK
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private CustomerEntity customer;
+
+    @ManyToOne
+    @JoinColumn(name = "event_id", nullable = false)
+    private EventEntity event;
+
     private String bookingDate;
     private String status;
+    private Double totalPrice;
+    private String packageType;
 
     // Getters and Setters
     public Long getBookingId() { return bookingId; }
     public void setBookingId(Long bookingId) { this.bookingId = bookingId; }
 
-    public Long getCustomerId() { return customerId; }
-    public void setCustomerId(Long customerId) { this.customerId = customerId; }
+    public CustomerEntity getCustomer() { return customer; }
+    public void setCustomer(CustomerEntity customer) { this.customer = customer; }
 
-    public Long getEventId() { return eventId; }
-    public void setEventId(Long eventId) { this.eventId = eventId; }
+    public EventEntity getEvent() { return event; }
+    public void setEvent(EventEntity event) { this.event = event; }
 
     public String getBookingDate() { return bookingDate; }
     public void setBookingDate(String bookingDate) { this.bookingDate = bookingDate; }
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
-}
+
+    public Double getTotalPrice() { return totalPrice; }
+    public void set

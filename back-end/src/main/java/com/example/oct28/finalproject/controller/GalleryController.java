@@ -20,15 +20,30 @@ public class GalleryController {
 
     @GetMapping("/{id}")
     public ResponseEntity<GalleryEntity> getById(@PathVariable Long id) {
-        return service.getById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+        return service.getById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
+    // POST /api/galleries?bookingId=1&photographerId=2
     @PostMapping
-    public GalleryEntity create(@RequestBody GalleryEntity g) { return service.create(g); }
+    public GalleryEntity create(@RequestParam Long bookingId,
+                                @RequestParam Long photographerId,
+                                @RequestBody GalleryEntity g) {
+        return service.create(bookingId, photographerId, g);
+    }
 
+    // PUT /api/galleries/{id}?bookingId=1&photographerId=2
     @PutMapping("/{id}")
-    public ResponseEntity<GalleryEntity> update(@PathVariable Long id, @RequestBody GalleryEntity g) {
-        return service.getById(id).map(existing -> ResponseEntity.ok(service.update(id, g))).orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<GalleryEntity> update(@PathVariable Long id,
+                                                @RequestParam Long bookingId,
+                                                @RequestParam Long photographerId,
+                                                @RequestBody GalleryEntity g) {
+        return service.getById(id)
+                .map(existing -> ResponseEntity.ok(
+                        service.update(id, bookingId, photographerId, g)
+                ))
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")

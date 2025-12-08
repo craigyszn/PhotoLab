@@ -15,16 +15,12 @@ public class CustomerService {
     @Autowired
     private CustomerRepository repo;
 
-    // BCrypt encoder for hashing passwords
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public List<CustomerEntity> getAll() { return repo.findAll(); }
 
     public Optional<CustomerEntity> getById(Long id) { return repo.findById(id); }
 
-    /**
-     * Create (saves) - also hashes the password if present
-     */
     public CustomerEntity create(CustomerEntity c) {
         if (c.getPassword() != null) {
             c.setPassword(encoder.encode(c.getPassword()));
@@ -42,10 +38,6 @@ public class CustomerService {
 
     public void delete(Long id) { repo.deleteById(id); }
 
-    /**
-     * Register a new user only if email not used.
-     * Returns Optional.empty() if email already exists.
-     */
     public Optional<CustomerEntity> register(CustomerEntity c) {
         if (c.getEmail() == null) return Optional.empty();
         if (repo.findByEmail(c.getEmail()).isPresent()) return Optional.empty();
@@ -53,9 +45,6 @@ public class CustomerService {
         return Optional.of(repo.save(c));
     }
 
-    /**
-     * Login check: returns the customer if password matches.
-     */
     public Optional<CustomerEntity> login(String email, String rawPassword) {
         Optional<CustomerEntity> found = repo.findByEmail(email);
         if (found.isEmpty()) return Optional.empty();
