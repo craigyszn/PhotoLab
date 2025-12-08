@@ -1,0 +1,176 @@
+/* HowItWorks.css - full file (replace existing) */
+
+/* container + title */
+.how-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px 80px;
+}
+.section-title {
+  text-align: center;
+  color: #06b6d4;
+  font-size: 28px;
+  margin-bottom: 36px;
+  font-weight: 700;
+}
+
+/* grid: two columns, consistent gap (horizontal & vertical) */
+.how-grid {
+  display: grid;
+  grid-template-columns: 1fr 480px; /* left flexible, right fixed for package preview */
+  gap: 32px 40px; /* row-gap column-gap */
+  align-items: start; /* important so small text cards don't stretch */
+  margin-bottom: 36px;
+}
+.how-grid.reverse {
+  grid-template-columns: 480px 1fr;
+}
+
+/* shared card style - base matches services card look */
+.how-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.10); /* match services base shadow */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+
+  /* identical to .service-card */
+  transition: all 0.3s ease;
+  will-change: transform, box-shadow;
+}
+
+/* hover effect identical to services card (only on hover-capable devices) */
+@media (hover: hover) {
+  .how-card:hover {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+  }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .how-card,
+  .how-card:hover {
+    transition: none !important;
+    transform: none !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.10) !important;
+  }
+}
+
+/* Visual card gets a slightly larger minimum height so package preview sits well */
+.how-visual { min-height: 180px; }
+
+/* Step cards are allowed to be smaller (auto height) */
+.how-step { min-height: 90px; }
+
+/* Step styles */
+.step-number {
+  color: #06b6d4;
+  font-weight: 800;
+  margin-bottom: 6px;
+  font-size: 16px;         /* bigger */
+  letter-spacing: 0.3px;   /* tighter, cleaner */
+  text-transform: uppercase;
+}
+
+.step-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+}
+
+.step-desc {
+  color: #374151;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Visual/card content */
+.card-title {
+  color: #06b6d4;
+  font-weight: 800;
+  margin-bottom: 12px;
+  font-size: 20px;        /* much more visible */
+  letter-spacing: 0.3px;
+}
+
+/* ensure card text color is visible */
+.card-text {
+  color: #374151;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 14px;
+}
+
+/* mini package previews inside the visual card */
+.mini-packages {
+  display: flex;
+  gap: 14px;
+  margin-top: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.mini-card {
+  background: #89eafc; /* white so they separate from the larger card */
+  border-radius: 10px;
+  padding: 12px 14px;
+  width: 128px;
+  height: 96px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 12px 20px rgba(16,24,40,0.06); /* stronger, more visible shadow */
+  border: 1px solid rgba(16,24,40,0.03);
+  box-sizing: border-box;
+}
+
+.mini-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1f2937; /* slightly stronger teal */
+  margin-bottom: 4px;
+}
+
+.mini-price {
+  font-size: 13px;
+  margin-top: 6px;
+  color: #1f2937;
+}
+
+/* decorative arrow */
+.arrow {
+  position: absolute;
+  bottom: -18px;
+  left: 28px;
+  font-size: 28px;
+  color: #111827;
+  transform: rotate(-20deg);
+  opacity: 0.95;
+}
+
+/* responsive: stack columns on smaller screens */
+@media (max-width: 900px) {
+  .how-grid, .how-grid.reverse {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .how-card {
+    /* slightly smaller padding on mobile */
+    padding: 18px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.10);
+    transition: all 0.3s ease;
+  }
+
+  .how-visual { min-height: auto; }
+  .how-step { min-height: auto; }
+  .arrow { display: none; }
+  .mini-packages { justify-content: center; gap: 12px; }
+}
