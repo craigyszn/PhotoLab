@@ -1,4 +1,3 @@
-// src/Pages/Auth.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -36,23 +35,39 @@ const Auth = () => {
     }
 
     try {
+      // LOGIN
       if (isLogin) {
         const res = await axios.post(`${API}/customers/login`, { email, password });
         const user = res.data;
-        localStorage.setItem("photolab_token", "demo-token");
+
+        const token = user?.token || "demo-token";
+        localStorage.setItem("photolab_token", token);
         localStorage.setItem("photolab_user", JSON.stringify(user));
-        navigate("/booking");
-      } else {
+
+        // Redirect to HOME now
+        navigate("/home", { replace: true });
+      }
+
+      // SIGNUP
+      else {
         const payload = { firstName, lastName, email, password };
         const res = await axios.post(`${API}/customers/register`, payload);
         const created = res.data;
-        localStorage.setItem("photolab_token", "demo-token");
+
+        const token = created?.token || null;
+        if (token) localStorage.setItem("photolab_token", token);
         localStorage.setItem("photolab_user", JSON.stringify(created));
-        navigate("/booking");
+
+        // Make sure the UI switches back to the login form,
+        // inform the user, then navigate to auth/login view.
+        setIsLogin(true);
+        alert("Account created successfully. Please log in.");
+        navigate("/auth?mode=login", { replace: true });
       }
+
     } catch (err) {
       console.error(err);
-      const message = err?.response?.data || err?.message || "Request failed";
+      const message = err?.response?.data?.message || err?.response?.data || err?.message || "Request failed";
       alert("Error: " + message);
     }
   };
@@ -81,11 +96,11 @@ const Auth = () => {
                 <div className="form-row signup-names">
                   <div className="form-group">
                     <label htmlFor="firstName">First Name</label>
-                    <input name="firstName" type="text" id="firstName" placeholder="Enter first name" required={!isLogin} />
+                    <input name="firstName" type="text" id="firstName" placeholder="Enter first name" required />
                   </div>
                   <div className="form-group">
                     <label htmlFor="lastName">Last Name</label>
-                    <input name="lastName" type="text" id="lastName" placeholder="Enter last name" required={!isLogin} />
+                    <input name="lastName" type="text" id="lastName" placeholder="Enter last name" required />
                   </div>
                 </div>
               )}
@@ -103,7 +118,7 @@ const Auth = () => {
               {!isLogin && (
                 <div className="form-group">
                   <label htmlFor="confirmPassword">Confirm Password</label>
-                  <input name="confirmPassword" type="password" id="confirmPassword" placeholder="Confirm your password" required={!isLogin} />
+                  <input name="confirmPassword" type="password" id="confirmPassword" placeholder="Confirm your password" required />
                 </div>
               )}
 
@@ -117,10 +132,14 @@ const Auth = () => {
                 </div>
               )}
 
-              <button type="submit" className="auth-submit-btn">{isLogin ? "Sign In" : "Create Account"}</button>
+              <button type="submit" className="auth-submit-btn">
+                {isLogin ? "Sign In" : "Create Account"}
+              </button>
             </form>
 
-            <div className="auth-divider"><span>OR</span></div>
+            <div className="auth-divider">
+              <span>OR</span>
+            </div>
 
             <div className="social-auth">
               <button className="social-btn google-btn">Continue with Google</button>
@@ -130,7 +149,9 @@ const Auth = () => {
             <div className="auth-toggle">
               <p>
                 {isLogin ? "Don't have an account? " : "Already have an account? "}
-                <button onClick={toggleForm} className="toggle-btn">{isLogin ? "Sign Up" : "Sign In"}</button>
+                <button onClick={toggleForm} className="toggle-btn">
+                  {isLogin ? "Sign Up" : "Sign In"}
+                </button>
               </p>
             </div>
 

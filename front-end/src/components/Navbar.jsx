@@ -1,4 +1,3 @@
-// src/components/Navbar.jsx
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
@@ -8,6 +7,7 @@ const Navbar = () => {
   const [user, setUser] = useState(null);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const navigate = useNavigate();
+
   const toggleMenu = () => setIsMenuOpen((s) => !s);
 
   const readUserFromStorage = () => {
@@ -47,6 +47,7 @@ const Navbar = () => {
       <nav className="navbar">
         <div className="navbar-container">
           <div className="navbar-content">
+
             <div className="navbar-logo">
               <span className="logo-box">
                 <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
@@ -56,11 +57,20 @@ const Navbar = () => {
             </div>
 
             <div className={`navbar-links ${isMenuOpen ? "active" : ""}`}>
+
+              {/* MAIN NAVIGATION LINKS */}
               <a href="#how" className="navbar-link">How it Works</a>
               <Link to="/portfolio" className="navbar-link">Portfolio</Link>
+
+              {/* NEW GALLERY LINK (same style as Portfolio) */}
+              {user && (
+                <Link to="/gallery" className="navbar-link">Gallery</Link>
+              )}
+
               <a href="#pricing" className="navbar-link">Pricing</a>
               <a href="#qa" className="navbar-link">Q&A</a>
 
+              {/* RIGHT-SIDE BUTTONS */}
               <div className="navbar-buttons-group">
                 {!user && (
                   <Link to="/auth">
@@ -91,7 +101,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Logout Confirmation Modal */}
+      {/* LOGOUT MODAL */}
       {showLogoutModal && (
         <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="logout-title">
           <div className="modal-card">
@@ -112,3 +122,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+ 
