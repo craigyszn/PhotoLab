@@ -34,9 +34,10 @@ public class BookingService {
     }
 
     /**
-     * Create booking and attach Customer + Event using their IDs.
+     * Create booking using Customer + Event IDs.
      */
     public BookingEntity create(Long customerId, Long eventId, BookingEntity b) {
+
         CustomerEntity customer = customerRepo.findById(customerId)
                 .orElseThrow(() -> new RuntimeException("Customer not found"));
 
@@ -49,18 +50,11 @@ public class BookingService {
         return bookingRepo.save(b);
     }
 
-    public BookingEntity update(Long id, Long customerId, Long eventId, BookingEntity b) {
+    /**
+     * UPDATE booking (no need for customerId/eventId during update)
+     */
+    public BookingEntity update(Long id, BookingEntity b) {
         b.setBookingId(id);
-
-        CustomerEntity customer = customerRepo.findById(customerId)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
-
-        EventEntity event = eventRepo.findById(eventId)
-                .orElseThrow(() -> new RuntimeException("Event not found"));
-
-        b.setCustomer(customer);
-        b.setEvent(event);
-
         return bookingRepo.save(b);
     }
 

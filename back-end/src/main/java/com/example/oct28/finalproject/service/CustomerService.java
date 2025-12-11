@@ -41,6 +41,12 @@ public class CustomerService {
     public Optional<CustomerEntity> register(CustomerEntity c) {
         if (c.getEmail() == null) return Optional.empty();
         if (repo.findByEmail(c.getEmail()).isPresent()) return Optional.empty();
+
+        // set default role if not provided
+        if (c.getRole() == null || c.getRole().trim().isEmpty()) {
+            c.setRole("CUSTOMER");
+        }
+
         c.setPassword(encoder.encode(c.getPassword()));
         return Optional.of(repo.save(c));
     }

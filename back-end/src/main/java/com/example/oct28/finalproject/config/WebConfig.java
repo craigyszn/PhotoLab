@@ -12,18 +12,41 @@ public class WebConfig {
         return new WebMvcConfigurer() {
           @Override
           public void addCorsMappings(CorsRegistry registry) {
-            // Allow the local dev frontends (Vite default 5173 and CRA 3000).
-            // For development only. In production restrict to actual domain(s).
+            // Accept dev frontends. In production lock this down to the real domain(s).
             registry.addMapping("/api/**")
-                    .allowedOrigins(
-                        "http://localhost:3000",
+                    .allowedOriginPatterns(
                         "http://localhost:5173",
                         "http://127.0.0.1:5173",
+                        "http://localhost:3000",
                         "http://127.0.0.1:3000"
                     )
-                    .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                    .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
                     .allowedHeaders("*")
-                    .allowCredentials(true);
+                    .exposedHeaders("Authorization", "Content-Disposition") // optional
+                    .allowCredentials(true)
+                    .maxAge(3600L);
+
+            // === ADDED: allow frontend to call /exports/** (your CSV endpoints)
+            registry.addMapping("/exports/**")
+                    .allowedOriginPatterns(
+                        "http://localhost:5173",
+                        "http://127.0.0.1:5173",
+                        "http://localhost:3000",
+                        "http://127.0.0.1:3000"
+                    )
+                    .allowedMethods("GET", "POST", "DELETE", "OPTIONS")
+                    .allowedHeaders("*")
+                    .exposedHeaders("Content-Disposition")
+                    .allowCredentials(true)
+                    .maxAge(3600L);
+
+            // If you serve uploaded static files from /uploads, allow browser to request them too:
+            registry.addMapping("/uploads/**")
+                    .allowedOriginPatterns("*")
+                    .allowedMethods("GET", "OPTIONS")
+                    .allowedHeaders("*")
+                    .allowCredentials(false)
+                    .maxAge(3600L);
           }
         };
     }

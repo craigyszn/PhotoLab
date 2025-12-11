@@ -15,6 +15,9 @@ public class CustomerEntity {
     private String email;
     private String password;
 
+    // role: "CUSTOMER", "PHOTOGRAPHER", or "ADMIN"
+    private String role;
+
     // Getters and Setters
     public Long getCustomerId() { return customerId; }
     public void setCustomerId(Long customerId) { this.customerId = customerId; }
@@ -30,4 +33,7 @@ public class CustomerEntity {
 
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
+
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
 }
